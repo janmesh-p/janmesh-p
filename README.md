@@ -2,21 +2,48 @@
 
 # Janmesh P.
 
-**Robotics · Autonomous Systems · Embedded Engineering**
+**Robotics · Multi-Robot Coordination · Autonomous Systems · Embedded Engineering**
 
-I build and validate robotic systems across perception, navigation, real-time control, and hardware integration.
+I build robotic systems and measure how they behave under congestion, timing faults, and imperfect assumptions—from planning and perception to real-time control and hardware interfaces.
 
-`ROS 2` `C++` `Python` `Embedded Systems` `Safety-Critical Control`
+`C++17` `ROS 2` `Python` `Multi-Agent Planning` `Embedded Systems`
 
-[Explore projects](https://github.com/janmesh-p?tab=repositories) · [GitHub profile](https://github.com/janmesh-p)
+[Featured project](https://github.com/janmesh-p/multi-robot-fleet-coordination) · [All repositories](https://github.com/janmesh-p?tab=repositories)
 
 </div>
 
 ---
 
-## 📊 Verified performance highlights
+## 🚀 Featured project: Multi-Robot Fleet Coordination
+
+**[Warehouse multi-agent pickup and delivery (MAPD)](https://github.com/janmesh-p/multi-robot-fleet-coordination)** — a C++17 fleet coordinator and grid simulator for up to **100 robots**, covering task allocation, multi-agent pathfinding, traffic management, and execution delays.
+
+- **Coordination:** With 25 robots and 360 orders/hour offered, independent A* froze in every benchmark run; coordinated ECBS averaged **359.5 deliveries/hour** over 10 seeds.
+- **Late execution:** At a 10% missed-step probability, turning off both traffic rules produced **44,170 simulated safety stops** over 80 one-hour runs. With the rules enabled, the matched experiments recorded **0**.
+- **Planner trade-offs:** Under heavy load, ECBS delivered about **40% more orders** than faster-to-compute PIBT (653.3 versus 465.1 deliveries/hour with 25 robots).
+- **Learning result:** A learned travel-time model improved prediction accuracy but did **not** pass the predefined test for higher delivery throughput against a tuned rule-based allocator.
+
+**Status:** Grid simulation, planning, and traffic experiments are complete through Stage 5. **Next:** communication faults and fuzz testing; then an Isaac Sim + ROS 2/Nav2 comparison on matched maps and metrics, followed by hardware-in-the-loop and overhead localization. These later stages are **planned, not yet validated**.
+
+[Source, benchmark commands, and results](https://github.com/janmesh-p/multi-robot-fleet-coordination) · [Interactive algorithm atlas](https://janmeshbuilds.dev/fleet-algorithm-atlas)
+
+## 📊 Measured performance highlights
 
 <table>
+<tr>
+<td align="center" width="33%">
+  <b>359.5 deliveries/h</b><br/>
+  <sub>25 coordinated robots<br/>360 orders/h offered · 10 seeds</sub>
+</td>
+<td align="center" width="33%">
+  <b>44,170 → 0</b><br/>
+  <sub>simulated safety stops<br/>traffic rules off → on · 80 h</sub>
+</td>
+<td align="center" width="33%">
+  <b>+40% throughput</b><br/>
+  <sub>ECBS vs faster-to-compute PIBT<br/>25 robots · heavy load</sub>
+</td>
+</tr>
 <tr>
 <td align="center" width="33%">
   <b>65 ms p50</b><br/>
@@ -31,32 +58,19 @@ I build and validate robotic systems across perception, navigation, real-time co
   <sub>APE RMSE on<br/>EuRoC MH_01_easy</sub>
 </td>
 </tr>
-<tr>
-<td align="center" width="33%">
-  <b>3.60 ms</b><br/>
-  <sub>mean stereo-VO frontend latency<br/>release build</sub>
-</td>
-<td align="center" width="33%">
-  <b>0.0642%</b><br/>
-  <sub>PnP failure rate<br/>3115 stereo frames</sub>
-</td>
-<td align="center" width="33%">
-  <b>0.55 s</b><br/>
-  <sub>e-stop standstill time<br/>safety arbiter demo</sub>
-</td>
-</tr>
 </table>
 
 > All figures above are taken from the linked project documentation and evaluation results in this profile's repositories.
 
 ## 🧭 About
 
-My work connects robotics algorithms to running systems: from sensor processing and state estimation to motion commands, embedded interfaces, and safety controls. I focus on measurable performance, repeatable tests, and fault handling—not just successful demos.
+My work connects robotics algorithms to running systems: multi-robot planning, navigation, state estimation, motion control, embedded interfaces, and safety mechanisms. I focus on measurable performance, repeatable tests, and fault handling—not just successful demos.
 
 ## 🧩 Selected work
 
 | Project | What it does | Documented highlight |
 | --- | --- | --- |
+| 🤖 **[Multi-robot fleet coordination](https://github.com/janmesh-p/multi-robot-fleet-coordination)**<br/><sub>C++17 · Multi-agent pathfinding · MAPD · Benchmarks</sub> | Reproducible warehouse fleet simulator with coordinated planning, order assignment, execution delays, and traffic safeguards for up to 100 robots. | **359.5 deliveries/hour** with 25 robots at 360 orders/hour offered; **0 simulated safety stops** with traffic rules on in the matched 80-hour delay experiment. |
 | 🧭 **[Terrain-aware autonomous navigation](https://github.com/janmesh-p/nav2-terrain-aware-sim)**<br/><sub>ROS 2 · Nav2 · NVIDIA Isaac Sim · C++ · Python · CAN</sub> | Custom Nav2 terrain costmap layer that detects slope, roughness, and height steps from 3D lidar, with evaluation against simulator ground truth, a safety command arbiter, and a simulated drive ECU. | Safety arbiter demo reached standstill in **0.55 s** during an e-stop while turning, with documented takeover and stop behavior. |
 | 🦾 **[Robot arm teleoperation](https://github.com/janmesh-p/teleop-ik-stack)**<br/><sub>ROS 2 · C++ · Eigen · Jetson Orin Nano · RealSense · Isaac Sim</sub> | Marker-driven teleoperation of a simulated Franka arm using custom inverse kinematics, a safety supervisor, and network fault testing. | **65 ms** median end-to-end capture-to-motion latency, **100 Hz** control loop, and documented no-overrun sessions. |
 | 👁️ **[Stereo visual odometry](https://github.com/janmesh-p/stereo-inertial-odometry)**<br/><sub>C++17 · OpenCV · EuRoC</sub> | Metric stereo visual-odometry frontend with tracking, triangulation, PnP-RANSAC, motion-consistency gating, and trajectory evaluation. | **5.23 cm** APE RMSE, **3.60 ms** mean latency, and **0.0642%** PnP failure rate on EuRoC MH_01_easy. |
@@ -67,7 +81,7 @@ My work connects robotics algorithms to running systems: from sensor processing 
 
 | Area | Tools and topics |
 | --- | --- |
-| 🤖 Robotics & autonomy | ROS 2, Nav2, Isaac Sim, teleoperation, localization, motion control |
+| 🤖 Robotics & autonomy | Multi-agent pathfinding, fleet coordination, ROS 2, Nav2, Isaac Sim, teleoperation, localization, motion control |
 | 👁️ Perception & estimation | stereo visual odometry, lidar terrain analysis, tracking, pose estimation |
 | 🔧 Systems software | C, C++, Python, Linux, instrumentation, testing, fault handling |
 | ⚙️ Embedded & hardware | STM32, FreeRTOS, Jetson, BeagleBone Black, CAN, UART, I²C, DMA |
