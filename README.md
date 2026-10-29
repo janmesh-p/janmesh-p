@@ -21,9 +21,13 @@ I build robotic systems and measure how they behave under congestion, timing fau
 - **Coordination:** With 25 robots and 360 orders/hour offered, independent A* froze in every benchmark run; coordinated ECBS averaged **359.5 deliveries/hour** over 10 seeds.
 - **Late execution:** At a 10% missed-step probability, turning off both traffic rules produced **44,170 simulated safety stops** over 80 one-hour runs. With the rules enabled, the matched experiments recorded **0**.
 - **Planner trade-offs:** Under heavy load, ECBS delivered about **40% more orders** than faster-to-compute PIBT (653.3 versus 465.1 deliveries/hour with 25 robots).
+- **Stage 7 map experiment:** Adding station-adjacent parking raised simulated throughput **27–34% with 50 robots** across four planners at 1,800 orders/hour offered; each planner improved in all 10 paired seeds. At 100 robots, station wait remained near 62% even on the modified map.
+- **Evidence pipeline:** **35 committed CSVs from 2,140 planning runs** rebuild the README tables, with CI table checks and sampled reruns. The separate learning recheck matched **3,480 runs with zero non-timing differences**; this confirms reproducibility, not a throughput improvement.
 - **Learning result:** A learned travel-time model improved prediction accuracy but did **not** pass the predefined test for higher delivery throughput against a tuned rule-based allocator.
 
-**Status:** Grid simulation, planning, and traffic experiments are complete through Stage 5. **Next:** communication faults and fuzz testing; then an Isaac Sim + ROS 2/Nav2 comparison on matched maps and metrics, followed by hardware-in-the-loop and overhead localization. These later stages are **planned, not yet validated**.
+**Status:** Grid simulation is complete through **Stage 7: benchmarks and evidence**, including communication-fault experiments and fuzz testing. **Next:** Isaac Sim, hardware-in-the-loop, and overhead perception; these stages are **planned, not yet validated**.
+
+[Stage 7 evidence and time budgets](https://github.com/janmesh-p/multi-robot-fleet-coordination/blob/80e56439354cf715f44002435c846e2bd8b95324/README.md#benchmarks-and-evidence-stage-7) · [Learning results and limitations](https://github.com/janmesh-p/multi-robot-fleet-coordination/blob/80e56439354cf715f44002435c846e2bd8b95324/learning/README.md)
 
 [Source, benchmark commands, and results](https://github.com/janmesh-p/multi-robot-fleet-coordination) · [Interactive algorithm atlas](https://janmeshbuilds.dev/fleet-algorithm-atlas)
 
